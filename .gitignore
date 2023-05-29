@@ -12,7 +12,6 @@ frontend/.pnp
 frontend/.pnp.js
 
 backend/server/node_modules
-backend/admin/node_modules
 
 # environment files
 .env
