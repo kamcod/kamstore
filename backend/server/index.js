@@ -10,6 +10,9 @@ const helmet = require('helmet');
 const rateLimiter = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+
+const userRoutes = require('./Routes/userRoutes');
 
 app.use(
     rateLimiter({
@@ -18,9 +21,10 @@ app.use(
     })
 );
 
-app.use(express.json())
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.json())
 app.use(bodyParser.json());
+app.use(multer().none());
 
 
 app.use(helmet())
@@ -28,6 +32,7 @@ app.use(xss())
 app.use(cors({ credentials: true, origin: process.env.frontend_domain }))
 app.use(cookieParser());
 
+app.use('/api', userRoutes);
 
 const port = process.env.PORT || 8000;
 
