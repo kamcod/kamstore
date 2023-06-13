@@ -13,6 +13,9 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 
 const userRoutes = require('./Routes/userRoutes');
+const jobsRoutes = require('./Routes/jobsRoutes');
+const authentication = require('./middlewares/authentication.');
+const errorHandler = require('./middlewares/error_handler');
 
 app.use(
     rateLimiter({
@@ -33,6 +36,8 @@ app.use(cors({ credentials: true, origin: process.env.frontend_domain }))
 app.use(cookieParser());
 
 app.use('/api', userRoutes);
+app.use('/api', authentication, jobsRoutes);
+app.use(errorHandler);
 
 const port = process.env.PORT || 8000;
 

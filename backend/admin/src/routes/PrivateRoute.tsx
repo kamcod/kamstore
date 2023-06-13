@@ -1,15 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import {Navigate, Outlet} from 'react-router-dom';
-import axioInstance from "@app/utils/axios";
 import axios from "axios";
 
 const PrivateRoute = () => {
   const [isAuth, setIsAuth] = useState(true);
+
   useEffect(() => {
-      console.log('in private routes...')
-      // TODO: set auth here
-            setIsAuth(false);
+      const token = localStorage.getItem('auth_token');
+      axios.post('http://localhost:8000/api/get-user', {
+          headers: {
+              "Authorization": token
+          }
+      })
+          .then(res => {
+              if(res.status === 200){
+                  setIsAuth(true);
+              }
+          })
+          .catch(err => {
+              console.log(err);
+              setIsAuth(false);
+          })
   }, [])
+
   return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };
 
