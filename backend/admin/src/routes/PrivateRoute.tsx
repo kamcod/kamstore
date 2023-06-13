@@ -8,7 +8,7 @@ const PrivateRoute = () => {
   useEffect(() => {
       console.log('in private routes...')
       // TODO: set auth here
-            setIsAuth(true);
+            setIsAuth(false);
   }, [])
   return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };
