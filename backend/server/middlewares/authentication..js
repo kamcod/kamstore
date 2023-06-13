@@ -8,7 +8,7 @@ const Authentication = (req, res, next) => {
         req.user= {userId: payload.userId};
         next();
     } catch (error) {
-        throw new unAuthenticatedError('Authentication invalid')
+        throw new UN_AUTHENTICATED('Authentication invalid')
     }
 };
 
