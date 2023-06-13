@@ -18,7 +18,12 @@ const adminSignIn = async (req, res) => {
     res.cookie("auth_token", token, { httpOnly: true, secure: false })
     res.status(200).json({ user: { name: user.name } })
 }
+const adminLogout = async (req, res) => {
+    res.clearCookie("auth_token");
+    res.status(200).json({ success: true, message: "logout successful" })
+}
 
 module.exports = {
-    adminSignIn
+    adminSignIn,
+    adminLogout
 }
