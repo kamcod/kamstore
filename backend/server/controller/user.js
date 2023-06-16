@@ -1,3 +1,4 @@
+const User = require('../db/model/user')
 const { BAD_REQUEST } = require('../errors')
 
 const adminSignIn = async (req, res) => {
@@ -9,8 +10,8 @@ const adminSignIn = async (req, res) => {
     if(!user || user.type !== 'admin'){
         res.status(500).json({status: false, message: 'User not found'})
     }
-
     const isPasswordCorrect = await user.matchPassword(password)
+
     if(!isPasswordCorrect){
         res.status(500).json({status: false, message: 'Invalid Credentials!'})
     }

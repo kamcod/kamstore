@@ -42,8 +42,9 @@ userSchema.pre('save', async function () {
     this.password = await bcrypt.hash(this.password, randomBytes)
 })
 
-userSchema.methods.matchPassword = async (candidatePassword) => {
-    return await bcrypt.compare(candidatePassword, this.password);
+userSchema.methods.matchPassword = async function (candidatePassword) {
+    const isMatch = await bcrypt.compare(candidatePassword, this.password)
+    return isMatch
 }
 
 userSchema.methods.createJWT = async () => {

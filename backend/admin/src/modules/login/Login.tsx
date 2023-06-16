@@ -6,7 +6,7 @@ import {useFormik} from 'formik';
 import {loginUser} from '@store/reducers/auth';
 import {setWindowClass} from '@app/utils/helpers';
 import {PfButton, PfCheckbox} from '@profabric/react-components';
-import axioInstance from '../../utils/axios';
+import { urls } from "@app/utils/urls";
 
 import * as Yup from 'yup';
 
@@ -20,16 +20,26 @@ const Login = () => {
 
   const login = async (email: string, password: string) => {
       setAuthLoading(true);
-      // TODO: just for the boiler plate, replace this
-      if(password === 'admin'){
-        toast.success('Login is succeed!');
+    axios.post(urls.ADMIN_LOGIN, { email, password })
+        .then(res => {
+          if(res.status === 200){
             setAuthLoading(false);
-            dispatch(loginUser(true));
-            navigate('/');
-      } else {
-        setAuthLoading(false);
-            toast.error('Failed');
-      }
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          setAuthLoading(false);
+        })
+
+      // if(password === 'admin'){
+      //   toast.success('Login is succeed!');
+      //       setAuthLoading(false);
+      //       dispatch(loginUser(true));
+      //       navigate('/');
+      // } else {
+      //   setAuthLoading(false);
+      //       toast.error('Failed');
+      // }
   };
 
 
