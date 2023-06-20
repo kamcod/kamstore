@@ -32,7 +32,7 @@ app.use(multer().none());
 
 app.use(helmet())
 app.use(xss())
-app.use(cors({ credentials: true, origin: process.env.frontend_domain }))
+app.use(cors({ credentials: true, origin: process.env.FRONTEND_DOMAIN }))
 app.use(cookieParser());
 
 app.use('/api', userRoutes);

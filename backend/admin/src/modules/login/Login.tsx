@@ -19,7 +19,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const login = async (email: string, password: string) => {
-      setAuthLoading(true);
+    setAuthLoading(true);
+    // axios.defaults.withCredentials = true;
     axios.post(urls.ADMIN_LOGIN, { email, password })
         .then(res => {
           if(res.status === 200){
@@ -30,16 +31,6 @@ const Login = () => {
           console.log(err);
           setAuthLoading(false);
         })
-
-      // if(password === 'admin'){
-      //   toast.success('Login is succeed!');
-      //       setAuthLoading(false);
-      //       dispatch(loginUser(true));
-      //       navigate('/');
-      // } else {
-      //   setAuthLoading(false);
-      //       toast.error('Failed');
-      // }
   };
 
 
