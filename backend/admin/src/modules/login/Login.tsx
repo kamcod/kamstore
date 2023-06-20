@@ -20,11 +20,12 @@ const Login = () => {
 
   const login = async (email: string, password: string) => {
     setAuthLoading(true);
-    // axios.defaults.withCredentials = true;
+    axios.defaults.withCredentials = true;
     axios.post(urls.ADMIN_LOGIN, { email, password })
         .then(res => {
           if(res.status === 200){
             setAuthLoading(false);
+            navigate('/');
           }
         })
         .catch(err => {

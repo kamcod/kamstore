@@ -10,7 +10,7 @@ const initialState: AuthState = {
   isLoggedIn: !!localStorage.getItem('token'),
   token: localStorage.getItem('token'),
   currentUser: {
-    email: 'admin@designroom.com',
+    email: 'admin@kamstore.com',
     picture: null
   }
 };

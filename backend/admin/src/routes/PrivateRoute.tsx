@@ -7,11 +7,8 @@ const PrivateRoute = () => {
   const [isAuth, setIsAuth] = useState(true);
 
   useEffect(() => {
-      const token = localStorage.getItem('auth_token');
+      axios.defaults.withCredentials = true;
       axios.post(urls.GET_USER, {
-          headers: {
-              "Authorization": token
-          }
       })
           .then(res => {
               if(res.status === 200){

@@ -29,7 +29,7 @@ const Main = () => {
   const fetchProfile = async () => {
     try {
       dispatch(loadUser({
-        email: 'admin@designroom.com',
+        email: 'admin@kamstore.com',
         picture: null
       }));
       setIsAppLoaded(true);

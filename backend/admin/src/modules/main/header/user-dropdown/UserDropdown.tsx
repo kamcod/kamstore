@@ -7,6 +7,7 @@ import {logoutUser} from '@store/reducers/auth';
 import styled from 'styled-components';
 import {PfDropdown, PfImage} from '@profabric/react-components';
 import axios from "axios";
+import {urls} from "@app/utils/urls";
 
 const StyledSmallUserImage = styled(PfImage)`
   margin-top: 3px;
@@ -113,7 +114,7 @@ const UserDropdown = () => {
   const logOut = (event: any) => {
     event.preventDefault();
     axios.defaults.withCredentials = true;
-    axios.delete('http://localhost:8000/api/logout')
+    axios.delete(urls.ADMIN_LOGOUT)
         .then(res => {
           if(res.status === 200){
             setDropdownOpen(false);
@@ -163,26 +164,13 @@ const UserDropdown = () => {
             </small>
           </p>
         </UserHeader>
-        <UserBody>
-          <div className="row">
-            <div className="col-4 text-center">
-              <Link to="/">{t<string>('header.user.followers')}</Link>
-            </div>
-            <div className="col-4 text-center">
-              <Link to="/">{t<string>('header.user.sales')}</Link>
-            </div>
-            <div className="col-4 text-center">
-              <Link to="/">{t<string>('header.user.friends')}</Link>
-            </div>
-          </div>
-        </UserBody>
         <UserFooter>
           <button
             type="button"
             className="btn btn-default btn-flat"
             onClick={navigateToProfile}
           >
-            {t<string>('header.user.profile')}
+            Profile
           </button>
           <button
             type="button"

@@ -32,7 +32,7 @@ const ForgotPassword = () => {
       <div className="card card-outline card-primary">
         <div className="card-header text-center">
           <Link to="/" className="h1">
-            <b>Design Room</b>
+            <b>Admin Panel</b>
           </Link>
         </div>
         <div className="card-body">

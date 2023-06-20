@@ -15,7 +15,7 @@ const adminSignIn = async (req, res) => {
     if(!isPasswordCorrect){
         return res.status(500).json({status: false, message: 'Invalid Credentials!'})
     }
-    const token = user.createJWT()
+    const token = await user.createJWT();
     res.cookie("auth_token", token, { httpOnly: true, secure: false })
     return res.status(200).json({ user: { name: user.name } })
 }

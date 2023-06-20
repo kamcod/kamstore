@@ -49,7 +49,7 @@ userSchema.methods.matchPassword = async function (candidatePassword) {
 
 userSchema.methods.createJWT = async () => {
     return jwt.sign(
-        { userId: this._id, name: this.name },
+        { userId: this._id, name: this.email },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_LIFETIME, }
     )
