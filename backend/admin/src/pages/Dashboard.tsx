@@ -1,17 +1,22 @@
 import {SmallBox} from '@app/components';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ContentHeader} from '@components';
 import axioInstance from "@app/utils/axios";
+import {urls} from "@app/utils/urls";
 
 const Dashboard = () => {
+  const [registeredUsersCount, setRegisteredUsersCount] = useState(0);
+  
   useEffect(() => {
-    // axioInstance.get('/api/getDashboardStats')
-    //     .then(res => {
-    //       console.log('res', res);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     })
+    axioInstance.get(urls.GET_DASHBOARD_STATS, {
+      withCredentials: true
+    })
+        .then(res => {
+          setRegisteredUsersCount(res.data.details.totalUsers)
+        })
+        .catch(err => {
+          console.log(err);
+        })
   }, [])
   return (
     <div>
@@ -55,7 +60,7 @@ const Dashboard = () => {
             <div className="col-lg-3 col-6">
               <div className="small-box bg-warning">
                 <div className="inner">
-                  <h3>44</h3>
+                  <h3>{registeredUsersCount}</h3>
 
                   <p>User Registrations</p>
                 </div>

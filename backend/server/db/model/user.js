@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please add type of user"]
     }
-})
+});
 
 userSchema.pre('save', async function () {
     const randomBytes = await bcrypt.genSalt(10);
@@ -47,9 +47,9 @@ userSchema.methods.matchPassword = async function (candidatePassword) {
     return isMatch
 }
 
-userSchema.methods.createJWT = async () => {
+userSchema.methods.createJWT = async function () {
     return jwt.sign(
-        { userId: this._id, name: this.email },
+        { userId: this._id, name: this.firstName },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_LIFETIME, }
     )
